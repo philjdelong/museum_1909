@@ -21,7 +21,6 @@ class Museum
         exhibit
       end
     end
-    rec_exhibs
   end
 
 end
