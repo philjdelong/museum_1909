@@ -16,11 +16,8 @@ class Museum
   end
 
   def recommend_exhibits(patron)
-    rec_exhibs = @exhibits.find_all do |exhibit|
-      if patron.interests.include?(exhibit.name)
-        exhibit
-      end
+    rec_exibs = @exhibits.find_all do |exhibit|
+      patron.interests.include?(exhibit.name)
     end
   end
-
 end
