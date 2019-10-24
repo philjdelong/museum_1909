@@ -62,11 +62,16 @@ class MuseumTest < Minitest::Test
     @bob.add_interest("Dead Sea Scrolls")
     @bob.add_interest("Gems and Minerals")
     @dmns.admit(@sally)
-    @sally.add_interest("IMAX")
+    @sally.add_interest("Dead Sea Scrolls")
 
-
-    assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@gems_and_minerals)
-    assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@dead_sea_scrolls)
-    assert_equal [@sally], @dmns.patrons_by_exhibit_interest(@imax)
+    # assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@gems_and_minerals)
+    # assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@dead_sea_scrolls)
+    # assert_equal [@sally], @dmns.patrons_by_exhibit_interest(@imax)
+    expected = {
+      @gems_and_minerals => [@bob],
+      @dead_sea_scrolls => [@bob,@sally],
+      @imax => []
+    }
+    assert_equal expected, @dmns.patrons_by_exhibit_interest
   end
 end
