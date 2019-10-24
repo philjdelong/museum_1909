@@ -20,4 +20,10 @@ class Museum
       patron.interests.include?(exhibit.name)
     end
   end
+
+  def patrons_by_exhibit_interest(exhibit)
+    @patrons.find_all do |patron|
+      patron.interests.include?(exhibit.name)
+    end
+  end
 end

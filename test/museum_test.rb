@@ -53,4 +53,20 @@ class MuseumTest < Minitest::Test
 
     assert_equal [@bob, @sally], @dmns.patrons
   end
+
+  def test_it_can_tell_patrons_by_exhibit_interest
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+    @dmns.admit(@bob)
+    @bob.add_interest("Dead Sea Scrolls")
+    @bob.add_interest("Gems and Minerals")
+    @dmns.admit(@sally)
+    @sally.add_interest("IMAX")
+
+
+    assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@gems_and_minerals)
+    assert_equal [@bob], @dmns.patrons_by_exhibit_interest(@dead_sea_scrolls)
+    assert_equal [@sally], @dmns.patrons_by_exhibit_interest(@imax)
+  end
 end
