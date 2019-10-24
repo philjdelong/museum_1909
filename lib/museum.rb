@@ -11,12 +11,12 @@ class Museum
     @exhibits << new_exhibit
   end
 
-  def add_patron(new_patron)
+  def admit(new_patron)
     @patrons << new_patron
   end
 
   def recommend_exhibits(patron)
-    rec_exibs = @exhibits.find_all do |exhibit|
+    @exhibits.find_all do |exhibit|
       patron.interests.include?(exhibit.name)
     end
   end

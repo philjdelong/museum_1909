@@ -29,25 +29,28 @@ class MuseumTest < Minitest::Test
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
-    assert_equal [@gems_and_minerals, @dead_sea_scrolls, @imax], @dmns.exhibits
-  end
 
-  def test_it_can_add_patrons
-    @dmns.add_patron(@bob)
-    @dmns.add_patron(@sally)
-    assert_equal [@bob, @sally], @dmns.patrons
+    assert_equal [@gems_and_minerals, @dead_sea_scrolls, @imax], @dmns.exhibits
   end
 
   def test_it_can_recommend_exhibits
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
-    @dmns.add_patron(@bob)
+    @dmns.admit(@bob)
     @bob.add_interest("Dead Sea Scrolls")
     @bob.add_interest("Gems and Minerals")
-    @dmns.add_patron(@sally)
+    @dmns.admit(@sally)
     @sally.add_interest("IMAX")
+
     assert_equal [@gems_and_minerals, @dead_sea_scrolls], @dmns.recommend_exhibits(@bob)
     assert_equal [@imax], @dmns.recommend_exhibits(@sally)
+  end
+
+  def test_it_can_admit_patrons
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+
+    assert_equal [@bob, @sally], @dmns.patrons
   end
 end
